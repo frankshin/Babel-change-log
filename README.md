@@ -113,8 +113,42 @@ console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
 > 该阶段预设表示该部分内容的提案部分已完成，有待后续用户实践和反馈才能进一步推进，并且只对使用过程中发现的关键问题进行修改
 包含以下两个插件：
 transform-object-rest-spread（babel6+） ps: babel7: @babel/plugin-proposal-object-rest-spread
+用于变量的解构赋值语法转译,默认请款下，此插件会使用babel的objectSpread生成符合规范的代码
+```js
+// Rest Properties
+let { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 }
+console.log(x) // 1
+console.log(y) // 2
+console.log(z) // { a: 3, b: 4 }
+// Spread Properties
+let n = { x, y, ...z }
+console.log(n) // { x: 1, y: 2, a: 3, b: 4 }
+```
 
+用法解析：
+```js
+// .babelrc
+{
+  "presets": ["env", "react", "es2015","stage-2"],
+  "plugins": [
+    ["@babel/plugin-proposal-object-rest-spread", { "loose": true, "useBuiltIns": true }]
+  ]
+}
+```
+loose：为true将采用babel的扩展程序，和Object.assign类似【差异：该插件定义新属性，但aobject.assign()设置属性】，details：
+[spreading-objects-versus-objectassign](http://2ality.com/2016/10/rest-spread-properties.html#spreading-objects-versus-objectassign)
 
+useBuildIns: 默认false，启用该选项将会直接使用object.assign，而非使用babel的扩展程序
+
+in：
+```js
+z={x, ...y}
+```
+
+out:
+```js
+z=Object.assign({x}, y)
+```
 
 transform-async-generator-functions(babel6+) ps: babel7: @babel/plugin-proposal-async-generator-functions
 
