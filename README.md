@@ -113,25 +113,10 @@ console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
 > 该阶段预设表示该部分内容的提案部分已完成，有待后续用户实践和反馈才能进一步推进，并且只对使用过程中发现的关键问题进行修改
 包含以下两个插件：
 transform-object-rest-spread（babel6+） ps: babel7: @babel/plugin-proposal-object-rest-spread
+
+
+
 transform-async-generator-functions(babel6+) ps: babel7: @babel/plugin-proposal-async-generator-functions
-
-
-example:
-
-```js
-// x ** y
-let squared = 2 ** 2;
-// same as: 2 * 2
-let cubed = 2 ** 3;
-// same as: 2 * 2 * 2
-// x **= y
-let a = 2;
-a **= 2;
-// same as: a = a * a;
-let b = 3;
-b **= 3;
-// same as: b = b * b * b;
-```
 
 - stage-4
 
