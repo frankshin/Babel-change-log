@@ -94,19 +94,7 @@ babel-preset-inify
 
 - stage-2
 
-包含stage-3以及如下两个plugins：
-[syntax-trailing-function-commas](https://www.npmjs.com/package/babel-plugin-syntax-trailing-function-commas)：尾逗号函数
-transform-object-reset-spread: 对ES6中解构赋值的一个扩展,因为ES6只支持对数组的解构赋值，对对象是不支持的, 如下eg：
-
-```javascript
-let { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 };
-console.log(x); // 1
-console.log(y); // 2
-console.log(z); // { a: 3, b: 4 }
-// 属性展开
-let n = { x, y, ...z };
-console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
-```
+[后续完善,详见](https://babeljs.io/docs/en/6.26.3/babel-preset-stage-2)
 
 - stage-3
 
