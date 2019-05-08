@@ -16,7 +16,6 @@ Babel-change-log：
   - [babel-polyfill](#babel-polyfill)
 - [Babel7+](#Babel7+)
   - [preset](#preset)
-  - [yearly Preset Deprecations](#yearly-Preset-Deprecations)
   - [remove proposal polyfills in @babel/polyfill](#remove-proposal-polyfills-in-@babel/polyfill)
   - [Package rename](#Package-rename)
   - [Scoped Packages](#Scoped-Packages)
@@ -51,15 +50,23 @@ Babel-change-log：
 > preset用于设定转码规则
 
 ```js
+// plugins
+babel-preset-env
 babel-preset-es2015
 babel-preset-es2016
-// react转码规则
-babel-preset-react
+babel-preset-es2017
+babel-preset-latest
 // ES7不同阶段语法提案的转码规则（共有4个阶段），选装一个
 babel-preset-stage-0
 babel-preset-stage-1
 babel-preset-stage-2
 babel-preset-stage-3
+// react转码规则
+babel-preset-flow
+// react转码规则
+babel-preset-react
+//
+babel-preset-inify
 ```
 
 - env
@@ -103,9 +110,10 @@ console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
 
 - stage-3
 
-该阶段预设表示该部分内容的提案部分已完成，有待后续用户实践和反馈才能进一步推进，并且只对使用过程中发现的关键问题进行修改
-
-支持async和await以及如下两个plugins：
+> 该阶段预设表示该部分内容的提案部分已完成，有待后续用户实践和反馈才能进一步推进，并且只对使用过程中发现的关键问题进行修改
+包含以下两个插件：
+transform-object-rest-spread（babel6+） ps: babel7: @babel/plugin-proposal-object-rest-spread
+transform-async-generator-functions(babel6+) ps: babel7: @babel/plugin-proposal-async-generator-functions
 
 
 example:
@@ -255,6 +263,8 @@ require('babel-polyfill');
 
 # Babel7+
 
+> 距离上次babel6的发布，已经过去三年时间，相比babel6，babel7的变化堪称断崖式
+
 ## preset
 
 - @babel/preset-env
@@ -262,17 +272,13 @@ require('babel-polyfill');
 webpack 3.x | babel-loader 8.x | babel 7.x
 npm install babel-loader@8.0.0-beta.0 @babel/core @babel/preset-env webpack
 
-> 距离上次babel6的发布，已经过去三年时间，相比babel6，babel7的变化堪称断崖式
-
-- yearly Preset Deprecations
-
+babel7中删除了以下阶段预设：
 ```js
 babel-preset-es2015
 babel-preset-es2016
 babel-preset-es2017
 babel-preset-latest
 ```
-
 ```
 以上的预设将会直接用'env'预设进行代替
 “我们发现保持阶段预设会导致一些问题，比如：
