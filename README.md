@@ -71,6 +71,8 @@ babel-preset-inify
 
 - env
 
+> 如果没有进行任何配置，preset-env === preset-latest 或 es2015 + es2016 + es2017
+
 - es2015
 
 - es2016
@@ -94,13 +96,22 @@ babel-preset-inify
 
 - stage-2
 
-[后续完善,详见](https://babeljs.io/docs/en/6.26.3/babel-preset-stage-2)
+> 该阶段的预设作为规范中的第一个版本，在未来的标准中只是可能会包含这些内容。并且从现在开始预计只会进行增量修改
+
+包含以下三个插件：
+1. syntax-dynamic-import(babel6+)  ps: @babel/plugin-syntax-dynamic-import(babel7+)
+
+2. transform-class-properties  ps: @babel/plugin-proposal-class-properties(babel7+)
+
+3. transform-decorators  ps: @babel/plugin-proposal-decorators(babel7+)
+
+[click for details](https://babeljs.io/docs/en/6.26.3/babel-preset-stage-2)
 
 - stage-3
 
 > 该阶段预设表示该部分内容的提案部分已完成，有待后续用户实践和反馈才能进一步推进，并且只对使用过程中发现的关键问题进行修改
 包含以下两个插件：
-transform-object-rest-spread（babel6+） ps: babel7: @babel/plugin-proposal-object-rest-spread
+1. transform-object-rest-spread（babel6+） ps: @babel/plugin-proposal-object-rest-spread(babel7+)
 用于变量的解构赋值语法转译,默认请款下，此插件会使用babel的objectSpread生成符合规范的代码
 ```js
 // Rest Properties
@@ -138,7 +149,9 @@ out:
 z=Object.assign({x}, y)
 ```
 
-transform-async-generator-functions(babel6+) ps: babel7: @babel/plugin-proposal-async-generator-functions
+2. transform-async-generator-functions(babel6+) ps: babel7: @babel/plugin-proposal-async-generator-functions
+
+[click for details](https://babeljs.io/docs/en/6.26.3/babel-preset-stage-3)
 
 - stage-4
 
