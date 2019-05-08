@@ -15,7 +15,7 @@ Babel-change-log：
   - [babel-preset-flow](#babel-preset-flow)
   - [babel-polyfill](#babel-polyfill)
 - [Babel7+](#Babel7+)
-  - [@babel/preset-env](#@babel/preset-env)
+  - [preset](#preset)
   - [yearly Preset Deprecations](#yearly-Preset-Deprecations)
   - [remove proposal polyfills in @babel/polyfill](#remove-proposal-polyfills-in-@babel/polyfill)
   - [Package rename](#Package-rename)
@@ -62,6 +62,16 @@ babel-preset-stage-2
 babel-preset-stage-3
 ```
 
+- env
+
+- es2015
+
+- es2016
+
+- es2017
+
+- latest
+
 - stage-0
 
 包含stage-1、stage-2、stage-3以及如下两个plugin：
@@ -79,7 +89,7 @@ babel-preset-stage-3
 
 包含stage-3以及如下两个plugins：
 [syntax-trailing-function-commas](https://www.npmjs.com/package/babel-plugin-syntax-trailing-function-commas)：尾逗号函数
-transform-object-reset-spread: 对 ES6中解构赋值的一个扩展,因为ES6只支持对数组的解构赋值，对对象是不支持的, 如下eg：
+transform-object-reset-spread: 对ES6中解构赋值的一个扩展,因为ES6只支持对数组的解构赋值，对对象是不支持的, 如下eg：
 
 ```javascript
 let { x, y, ...z } = { x: 1, y: 2, a: 3, b: 4 };
@@ -93,9 +103,10 @@ console.log(n); // { x: 1, y: 2, a: 3, b: 4 }
 
 - stage-3
 
+该阶段预设表示该部分内容的提案部分已完成，有待后续用户实践和反馈才能进一步推进，并且只对使用过程中发现的关键问题进行修改
+
 支持async和await以及如下两个plugins：
-[babel-plugin-transform-async-to-generator](https://www.npmjs.com/package/babel-plugin-transform-async-to-generator)
-[babel-plugin-transform-exponentiation-operator](https://www.npmjs.com/package/babel-plugin-transform-exponentiation-operator)
+
 
 example:
 
@@ -117,6 +128,12 @@ b **= 3;
 - stage-4
 
 已成为标准
+
+- flow
+
+- react
+
+- minify
 
 ## .babelrc
 
@@ -200,7 +217,7 @@ $ npm install --save-dev babel-cli
 
 ## babel-eslint
 
-## babel-preset-env 
+## babel-preset-env
 
 Babel预设，通过根据您的目标浏览器或运行时环境自动确定您需要的Babel插件和polyfill，将ES2015+编译为ES5。在没有任何配置选项的情况下，babel-preset-env与babel-preset-latest（或者babel-preset-es2015，babel-preset-es2016和babel-preset-es2017一起）的行为完全相同。
 
@@ -208,6 +225,14 @@ webpack 3.x babel-loader 7.x | babel 6.x
 npm install babel-loader babel-core babel-preset-env webpack
 
 ## babel-preset-react
+
+This preset includes the following plugins/presets:
+preset-flow
+syntax-jsx
+transform-react-jsx
+transform-react-display-name
+
+details: [babel-preset-react](https://babeljs.io/docs/en/6.26.3/babel-preset-react)
 
 ## babel-preset-flow
 
@@ -230,14 +255,16 @@ require('babel-polyfill');
 
 # Babel7+
 
-## @babel/preset-env
+## preset
+
+- @babel/preset-env
 
 webpack 3.x | babel-loader 8.x | babel 7.x
 npm install babel-loader@8.0.0-beta.0 @babel/core @babel/preset-env webpack
 
 > 距离上次babel6的发布，已经过去三年时间，相比babel6，babel7的变化堪称断崖式
 
-## yearly Preset Deprecations
+- yearly Preset Deprecations
 
 ```js
 babel-preset-es2015
