@@ -235,7 +235,7 @@ $ npm install --save-dev babel-cli
 
 ## babel-loader
 
-> babel加载器
+> babel加载器
 
 ## babel-preset-react-app
 
@@ -344,7 +344,8 @@ global._babelPolyfill = true;
 
 > some package's name remove the preset- or plugin-
 
-ps：官方文档建议：but I'm choosing to use the whole package name for clarity (maybe we should just remove that, given it doesn't save that much typing anyway)
+ps：清晰可见，我们尽量使用包名的全称 (也许我们应该删除这一功能，因为这么点缩写并没有帮我们节省多少字节) - 官方文档
+此处送个呵呵😄
 
 ```js
 -  "presets": ["@babel/preset-react"],
@@ -537,7 +538,7 @@ export * as ns from "mod";
 
 ### @babel/plugin-transform-template-literals
 
-它导致babel6抛出错误的字符串转译序列
+它导致babel6抛出错误的字符串转译序列
 
 ```js
 tag`\unicode and \u{55}`;
