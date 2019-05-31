@@ -2,11 +2,11 @@
 
 [toc]
 
-# Babel6+
+## Babel6+
 
 > 项目是作为一个monorepo来进行管理的，它由无数npm包组成
 
-## preset
+### preset
 
 > preset用于设定转码规则
 
@@ -124,9 +124,9 @@ z=Object.assign({x}, y)
 
 - minify
 
-## .babelrc
+### .babelrc
 
-## babel-cli
+### babel-cli
 
 Babel提供babel-cli工具，用于命令行转码。
 
@@ -148,11 +148,11 @@ babel src -d lib
 $ babel src -d lib -s
 ```
 
-## babel-core
+### babel-core
 
 如果你需要以编程的方式来使用Babel，可以使用babel-core这个包。
 
-## babel-register
+### babel-register
 
 babel-register模块改写require命令，为它加上一个钩子。此后，每当使用require加载.js、.jsx、.es和.es6后缀名的文件，就会先用Babel进行转码。
 
@@ -170,7 +170,7 @@ require("./index.js");
 
 然后，就不需要手动对index.js转码了,需要注意的是，babel-register只会对require命令加载的文件转码，而不会对当前文件转码。另外，由于它是实时转码，所以只适合在开发环境使用。
 
-## babel-node
+### babel-node
 
 babel-cli工具自带一个babel-node命令，提供一个支持ES6的REPL环境。它支持Node的REPL环境的所有功能，而且可以直接运行ES6代码。它不用单独安装，而是随babel-cli一起安装。然后，执行babel-node就进入PEPL环境。
 还可以通过babel-register和babel-node使用Babel，但由于这两种用法不适合生产环境故省略。
@@ -194,26 +194,26 @@ $ npm install --save-dev babel-cli
 }
 ```
 
-## babel-loader
+### babel-loader
 
 > babel加载器
 
-## babel-preset-react-app
+### babel-preset-react-app
 
-## babel-runtime
+### babel-runtime
 
 @ babel / runtime是一个包含Babel模块化运行时助手和一个版本的regenerator-runtime的库。
 
-## babel-eslint
+### babel-eslint
 
-## babel-preset-env
+### babel-preset-env
 
 Babel预设，通过根据您的目标浏览器或运行时环境自动确定您需要的Babel插件和polyfill，将ES2015+编译为ES5。在没有任何配置选项的情况下，babel-preset-env与babel-preset-latest（或者babel-preset-es2015，babel-preset-es2016和babel-preset-es2017一起）的行为完全相同。
 
 webpack 3.x babel-loader 7.x | babel 6.x
 npm install babel-loader babel-core babel-preset-env webpack
 
-## babel-preset-react
+### babel-preset-react
 
 This preset includes the following plugins/presets:
 preset-flow
@@ -223,11 +223,11 @@ transform-react-display-name
 
 details: [babel-preset-react](https://babeljs.io/docs/en/6.26.3/babel-preset-react)
 
-## babel-preset-flow
+### babel-preset-flow
 
 Flow是Facebook开源的静态代码检查工具，他的作用是在运行代码之前对React组件以及Jsx语法进行静态代码的检查以发现一些可能存在的问题。
 
-## babel-polyfill
+### babel-polyfill
 
 Babel默认只转换新的JavaScript句法（syntax），而不转换新的API，比如Iterator、Generator、Set、Maps、Proxy、Reflect、Symbol、Promise等全局对象，以及一些定义在全局对象上的方法（比如Object.assign）都不会转码。
 举例来说，ES6在Array对象上新增了Array.from方法。Babel就不会转码这个方法。如果想让这个方法运行，必须使用babel-polyfill，为当前环境提供一个垫片。
@@ -242,11 +242,11 @@ import 'babel-polyfill';
 require('babel-polyfill');
 ```
 
-# Babel7+
+## Babel7+
 
 > 距离上次babel6的发布，已经过去三年时间，相比babel6，babel7的变化堪称断崖式
 
-## preset
+### preset
 
 - @babel/preset-env
 
@@ -268,9 +268,9 @@ babel-preset-latest
 —— 作者解释
 ```
 
-## remove proposal polyfills in @babel/polyfill
+### remove proposal polyfills in @babel/polyfill
 
-now @babel/polyfill is mostly just an alias of core-js v2. Source, now @babel/polyfill's details follow:
+在@babel/polyfill中删除了polyfill相关的提案，现在的@babel/polyfill实际上就是[core-js v2](https://github.com/babel/babel/blob/master/packages/babel-polyfill/src/index.js)的别名。
 
 ```js
 // babel/packages/babel-polyfill/src/index.js
@@ -301,7 +301,7 @@ if (global._babelPolyfill && typeof console !== "undefined" && console.warn) {
 global._babelPolyfill = true;
 ```
 
-## package Renames
+### package Renames
 
 > some package's name remove the preset- or plugin-
 
@@ -315,7 +315,7 @@ ps：清晰可见，我们尽量使用包名的全称 (也许我们应该删除�
 +  "plugins": ["@babel/plugin-transform-runtime"], // same
 ```
 
-## scoped packages
+#### scoped packages
 
 最大的改变是将所有的依赖包转换为范围包（即在[monorepo](https://github.com/babel/babel/tree/master/packages)中该包的文件夹名称没有改变，但是安装到package.json中的名称是变化的）。
 
@@ -324,7 +324,7 @@ ps：清晰可见，我们尽量使用包名的全称 (也许我们应该删除�
 babel-cli -> @babel/cli
 ```
 
-## switch to -proposal- for TC39 proposals
+#### switch to -proposal- for TC39 proposals
 
 早期发布的带有年份后缀的插件包（如es2015,es2016,etc）会被重命名为以提案作为后缀的方式（-proposal）。这样可以帮助我们更好的区分一个提案是否是javascript的标准提案。
 如:
@@ -334,12 +334,12 @@ babel-cli -> @babel/cli
 ```
 这意味着如果一个提案一旦进入stage-4，即进入标准，我们将会重新命名包名
 
-## remove the year from package names
+#### remove the year from package names
 
 Some of the plugins had -es3- or -es2015- in the names, but these were unnecessary.
 @babel/plugin-transform-es2015-classes became @babel/plugin-transform-classes
 
-## 'use strict' and this in CommonJS
+### 'use strict' and this in CommonJS
 
 babel6会不分青红皂白的对所有它被告知要进行处理的文件进行es6模块的转换，不管文件代码中是否有es6的export/import语法，This had the effect of rewriting file-scoped references to this to be undefined and inserting "use strict" at the top of all CommonJS modules that were processed by Babel.
 
@@ -367,7 +367,7 @@ require("a");
 
 ps: 如果想要在所有commonjs模块中自动插入'use strict'，需要在项目的babel配置中明确的使用 transform-strict-mode 插件
 
-## Separation of the React and Flow presets
+### Separation of the React and Flow presets
 
 babel-preset-react一直包含流插件，这样会给用户造成了很多问题，如用户由于输入错误而无意中使用了流语法，或者在没有使用流本身进行类型检查的情况下将其添加，从而导致错误等。
 当项目决定支持TypeScript时，这个问题就变得复杂了。如果你想使用React和TypeScript预设，就必须找到一种通过文件类型或指令自动打开/关闭语法的方法。最后会发现完全分离预设更容易解决问题。
@@ -381,13 +381,13 @@ babel-preset-react一直包含流插件，这样会给用户造成了很多问�
 }
 ```
 
-## Babel's CLI commands
+### Babel's CLI commands
 
-### @babel/node
+#### @babel/node
 
 The babel-node command in Babel 6 was part of the babel-cli package. In Babel 7, this command has been split out into its own @babel/node package, so if you are using that command, you'll want to add this new dependency.
 
-### @babel/runtime, @babel/plugin-transform-runtime
+#### @babel/runtime, @babel/plugin-transform-runtime
 
 We have separated out Babel's helpers from it's "polyfilling" behavior in runtime. More details in the PR.
 
@@ -440,9 +440,9 @@ npm install @babel/plugin-transform-runtime --save-dev
 }
 ```
 
-## Spec Compliancy
+### Spec Compliancy
 
-### @babel/plugin-proposal-object-rest-spread
+#### @babel/plugin-proposal-object-rest-spread
 
 在对象的RestElement后面不出现逗号
 
@@ -453,7 +453,7 @@ var {
 } = { a: 1 };
 ```
 
-### @babel/plugin-proposal-class-properties
+#### @babel/plugin-proposal-class-properties
 
 ```js
 // input
@@ -483,7 +483,7 @@ var Bork = function Bork() {
 Bork.a = "foo";
 ```
 
-### Split @babel/plugin-transform-export-extensions into the two renamed proposals
+#### Split @babel/plugin-transform-export-extensions into the two renamed proposals
 
 - @babel/plugin-proposal-export-default-from
 
@@ -497,7 +497,7 @@ export v from "mod";
 export * as ns from "mod";
 ```
 
-### @babel/plugin-transform-template-literals
+#### @babel/plugin-transform-template-literals
 
 它导致babel6抛出错误的字符串转译序列
 
@@ -548,7 +548,7 @@ tag(_templateObject);
 
 详细可以参考模版文字的[修订提案](https://tc39.github.io/proposal-template-literal-revision/)
 
-### @babel/plugin-proposal-decorators
+#### @babel/plugin-proposal-decorators
 
 在预期新的装饰器提议实现时，我们决定将其作为新的默认行为。 这意味着要继续使用当前装饰器语法/行为，必须将legacy选项设置为true。
 
@@ -564,7 +564,7 @@ tag(_templateObject);
 
 NOTE: 如果您正在使用包含此插件的@ babel / preset-stage-0或@ babel / preset-stage-1，则必须向它们传递decoratorsLegacy选项
 
-### @babel/plugin-proposal-pipeline-operator
+#### @babel/plugin-proposal-pipeline-operator
 
 默认情况下，较新的提案会出错，并且要求每个人在事情仍然<第2阶段时选择特定提案，[了解详情](https://babeljs.io/blog/2018/07/19/whats-happening-with-the-pipeline-proposal)
 
@@ -577,9 +577,9 @@ NOTE: 如果您正在使用包含此插件的@ babel / preset-stage-0或@ babel 
 }
 ```
 
-### Removed babel-plugin-transform-class-constructor-call
+#### Removed babel-plugin-transform-class-constructor-call
 
-### @babel/plugin-async-to-generator
+#### @babel/plugin-async-to-generator
 
 我们将babel-plugin-transform-async-to-module-method合并到常规异步插件中，只需将其作为一个选项即可
 
@@ -596,26 +596,26 @@ NOTE: 如果您正在使用包含此插件的@ babel / preset-stage-0或@ babel 
 }
 ```
 
-## babel
+### babel
 
 丢掉babel包,details:[#5293](https://github.com/babel/babel/pull/5293)
 
 这个包当前给你一个错误信息，在v6中安装babel-cli。 我想我们可以用这个名字做一些有趣的事情
 
-## @babel/register
+### @babel/register
 
 babel-core/register.js has been removed [#5132](https://github.com/babel/babel/pull/5132)
 
 [details](https://babeljs.io/docs/en/v7-migration#babel-register) of @babel/register
 
-## @babel/generator
+### @babel/generator
 
 [details](https://babeljs.io/docs/en/v7-migration#babel-generator) of @babel/generator
 
-## @babel/core
+### @babel/core
 
 [details](https://babeljs.io/docs/en/v7-migration#babel-core) of @babel/core
 
-## @babel/preset-env
+### @babel/preset-env
 
 松散模式现在将自动排除typeof-symbol变换（很多使用松散模式的项目都是这样做的）
