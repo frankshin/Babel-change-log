@@ -1,45 +1,6 @@
-Babel-change-log：
+# Babel-change-log：
 
-- [Babel6+](#Babel6+)
-  - [preset](#preset)
-  - [babellrc](#babellrc)
-  - [babel-cli](#babel-cli)
-  - [babel-core](#babel-core)
-  - [babel-register](#babel-register)
-  - [babel-loader](#babel-loader)
-  - [babel-preset-react-app](#babel-preset-react-app)
-  - [babel-runtime](#babel-runtime)
-  - [babel-eslint](#babel-eslint)
-  - [babel-preset-env](#babel-preset-env)
-  - [babel-preset-react](#babel-preset-react)
-  - [babel-preset-flow](#babel-preset-flow)
-  - [babel-polyfill](#babel-polyfill)
-- [Babel7+](#Babel7+)
-  - [preset](#preset)
-  - [remove proposal polyfills in @babel/polyfill](#remove-proposal-polyfills-in-@babel/polyfill)
-  - [Package rename](#Package-rename)
-  - [Scoped Packages](#Scoped-Packages)
-  - [switch to -proposal- for TC39 proposals](#switch-to-proposal-for-TC39-proposals)
-  - [remove the year from package names](#remove-the-year-from-package-names)
-  - ['use strict' and this in commonjs](#'use-strict'-and-this-in-commonjs)
-  - [separation of the react and flow preset](#separation-of-the-react-and-flow-preset)
-  - [Babel's CLI commands](#Babel's-CLI-commands)
-    - [@babel/node](#@babel/node)
-    - [@babel/runtime](#@babel/runtime)
-  - [Spec Compliancy](#Spec-Compliancy)
-    - [@babel/plugin-proposal-object-rest-spread](#@babel/plugin-proposal-object-rest-spread)
-    - [@babel/plugin-proposal-class-properties](#@babel/plugin-proposal-class-properties)
-    - [Split @babel/plugin-transform-export-extensions into the two renamed proposals](#Split-@babel/plugin-transform-export-extensions-into-the-two-renamed-proposals)
-    - [@babel/plugin-transform-template-literals](#@babel/plugin-transform-template-literals)
-    - [@babel/plugin-proposal-decorators](#@babel/plugin-proposal-decorators)
-    - [@babel/plugin-proposal-pipeline-operator](#@babel/plugin-proposal-pipeline-operator)
-    - [Removed babel-plugin-transform-class-constructor-call](#Removed-babel-plugin-transform-class-constructor-call)
-    - [@babel/plugin-async-to-generator](#@babel/plugin-async-to-generator)
-  - [babel](#babel)
-    - [@babel/register](#@babel/register)
-    - [@babel/generator](#@babel/generator)
-    - [@babel/core](#@babel/core)
-    - [@babel/preset-env](#@babel/preset-env)
+[toc]
 
 # Babel6+
 
@@ -356,22 +317,22 @@ ps：清晰可见，我们尽量使用包名的全称 (也许我们应该删除�
 
 ## scoped packages
 
-The most important change is finally switching all packages to scoped packages(the folder names in the monorepo are not changed but the name in its package.json is)
-Your dependencies will need to be modified like so:
+最大的改变是将所有的依赖包转换为范围包（即在[monorepo](https://github.com/babel/babel/tree/master/packages)中该包的文件夹名称没有改变，但是安装到package.json中的名称是变化的）。
 
+这意味着在社区不会再出现有关名称的issues，重命名后将会清晰的和社区插件区分开，命名遵循简单的规则，比如原来的babel-cli将会改为如下：
 ```js
 babel-cli -> @babel/cli
 ```
 
 ## switch to -proposal- for TC39 proposals
 
-his means any plugin that isn't in a yearly release (ES2015, ES2016, etc) should be renamed to -proposal. This is so we can better signify that a proposal isn't officially in JavaScript.
-Examples:
+早期发布的带有年份后缀的插件包（如es2015,es2016,etc）会被重命名为以提案作为后缀的方式（-proposal）。这样可以帮助我们更好的区分一个提案是否是javascript的标准提案。
+如:
 ```js
 @babel/plugin-transform-function-bind is now @babel/plugin-proposal-function-bind (Stage 0)
 @babel/plugin-transform-class-properties is now @babel/plugin-proposal-class-properties (Stage 3)
 ```
-This also means that when a proposal moves to Stage 4, we should rename the package
+这意味着如果一个提案一旦进入stage-4，即进入标准，我们将会重新命名包名
 
 ## remove the year from package names
 
