@@ -336,25 +336,24 @@ babel-cli -> @babel/cli
 
 #### remove the year from package names
 
-Some of the plugins had -es3- or -es2015- in the names, but these were unnecessary.
-@babel/plugin-transform-es2015-classes became @babel/plugin-transform-classes
+一些插件名称中包含类似“-es3”或“-es2015-”的字符，但这些没有实际意义，所以做如下修改，比如@babel/plugin-transform-es2015-classes 会改成： @babel/plugin-transform-classes
 
 ### 'use strict' and this in CommonJS
 
-babel6会不分青红皂白的对所有它被告知要进行处理的文件进行es6模块的转换，不管文件代码中是否有es6的export/import语法，This had the effect of rewriting file-scoped references to this to be undefined and inserting "use strict" at the top of all CommonJS modules that were processed by Babel.
+babel6会对所有它被告知要进行处理的文件进行es6模块的转换，不管文件代码中是否有es6的export/import语法，这对于重写文件范围引用为this或undefined以及插入"use strict"在需要被babel处理的commonjs模块的顶部会产生影响
 
 ```js
 // input.js
-this
+this;
 
 // output.js v6
 "use strict"; // assumed strict modules
 undefined; // changed this to undefined
 
 // output.js v7
-this
+this;
 ```
-该行为模式在babel7中被加以限制，以便 transform-es2015-modules-commonjs 的转换，文件只有在具有es6的import/export时才会进行上述改变(Editor's note: This may change again if we land https://github.com/babel/babel/issues/6242, so we'll want to revisit this before publishing).
+该行为模式在babel7中被加以限制，所以对于 transform-es2015-modules-commonjs 的转换，文件只有在具有es6的import/export时才会进行上述改变(编者：这里所描述的修改可能会在发布前再次变更，detaisl：https://github.com/babel/babel/issues/6242)
 
 ```js
 // input2.js
@@ -364,8 +363,7 @@ import "a";
 "use strict";
 require("a");
 ```
-
-ps: 如果想要在所有commonjs模块中自动插入'use strict'，需要在项目的babel配置中明确的使用 transform-strict-mode 插件
+ps: 如果想要在所有commonjs模块中自动插入'use strict'，需要在项目的babel配置中明确的使用 [transform-strict-mode](https://babeljs.io/docs/en/babel-plugin-transform-strict-mode) 插件
 
 ### Separation of the React and Flow presets
 
@@ -381,11 +379,25 @@ babel-preset-react一直包含流插件，这样会给用户造成了很多问�
 }
 ```
 
+### options parsing
+
+babel7的配置项比babel6更加严格，以逗号分隔的预设列表，例如 “presets”：'es2015，es2016'之前可以正常运行的，现在会解析失败，需要更改为数组形式
+```js
+{
+-  "presets": "@babel/preset-env, @babel/preset-react"
++  "presets": ["@babel/preset-env", "@babel/preset-react"]
+}
+```
+
+### plugin/preset exports
+
+现在所有的插件/预设一致都以函数的形式导出而不是对象，这样可以帮我我们处理缓存
+
 ### Babel's CLI commands
 
 #### @babel/node
 
-The babel-node command in Babel 6 was part of the babel-cli package. In Babel 7, this command has been split out into its own @babel/node package, so if you are using that command, you'll want to add this new dependency.
+在babel6中，babel-node命令是集成在babel-cli中的，babel7中，这个命令被分离出来成为一个独立的包@babel/node，所以如果你需要使用这个命令，你需要单独安装这个依赖包。
 
 #### @babel/runtime, @babel/plugin-transform-runtime
 
