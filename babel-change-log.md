@@ -401,12 +401,9 @@ babel7的配置项比babel6更加严格，以逗号分隔的预设列表，例�
 
 #### @babel/runtime, @babel/plugin-transform-runtime
 
-We have separated out Babel's helpers from it's "polyfilling" behavior in runtime. More details in the PR.
-
-@babel/runtime now only contains the helpers, and if you need core-js you can use @babel/runtime-corejs2 and the option provided in the transform. For both you still need the @babel/plugin-transform-runtime
+@babel/runtime现在只包含帮助程序，如果需要core-js，可以使用@babel/runtime-corejs2以及转换中提供的选项。 如果两者都需要，就仍然需要@babel/plugin-transform-runtime
 
 - Only Helpers
-
 ```js
 // install the runtime as a dependency
 npm install @babel/runtime
@@ -420,8 +417,7 @@ npm install @babel/plugin-transform-runtime --save-dev
 
 - Helpers + polyfilling from core-js
 
-So if you need core-js support with transform-runtime, you would now pass the corejs option and use the @babel/runtime-corejs2 dependency instead of @babel/runtime.
-
+因此，如果您需要使用transform-runtime支持core-js，那么您现在将传递corejs选项并使用@ babel / runtime-corejs2依赖项而不是@ babel / runtime。
 ```js
 // install the runtime as a dependency
 npm install @babel/runtime-corejs2
@@ -437,22 +433,9 @@ npm install @babel/plugin-transform-runtime --save-dev
 +   }],
   ]
 }
-
-// all config demo
-{
-  "plugins": [
-    [ "@babel/plugin-transform-runtime", {
-        "corejs": false,
-        "helpers": true,
-        "regenerator": true,
-        "useESModules": false
-      }
-    ]
-  ]
-}
 ```
 
-### Spec Compliancy
+### 规范合规性
 
 #### @babel/plugin-proposal-object-rest-spread
 
