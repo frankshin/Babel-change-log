@@ -231,7 +231,7 @@ Flow是Facebook开源的静态代码检查工具，他的作用是在运行代�
 
 Babel默认只转换新的JavaScript句法（syntax），而不转换新的API，比如Iterator、Generator、Set、Maps、Proxy、Reflect、Symbol、Promise等全局对象，以及一些定义在全局对象上的方法（比如Object.assign）都不会转码。
 举例来说，ES6在Array对象上新增了Array.from方法。Babel就不会转码这个方法。如果想让这个方法运行，必须使用babel-polyfill，为当前环境提供一个垫片。
-关于babel不进行转码的详细清清单参见：babel-plugin-transform-runtime的[definitions.js](https://github.com/babel/babel/blob/master/packages/babel-plugin-transform-runtime/src/definitions.js)
+关于babel不进行转码的详细清单参见：babel-plugin-transform-runtime的[definitions.js](https://github.com/babel/babel/blob/master/packages/babel-plugin-transform-runtime/src/definitions.js)
 
 ```js
 // install
